@@ -1,33 +1,3 @@
-// import React, { useEffect, useState } from 'react'
-// import style from '../styles/Quote.module.css'
-// import axios from 'axios'
-
-
-
-// export default function Quote() {
-//     const [data, setData] = useState({ });
-//     const [quote, setQuote]= useState()
-  
-//     useEffect(()=>{
-//       axios.get("https://type.fit/api/quotes").then(
-//         res=>setData(res.data[Math.floor(Math.random()*res.data.length)]))
-//       }, []
-//     )
-    
-//   return (
-//     <div className={style.main}>
-//     <h1>  Welcome To Random Quotes Generator APP</h1>
-     
-//       <div className={style.card}>
-//         <h2>
-//            " {data.text}"
-//         </h2>
-//         <h5> {data.author}</h5>
-//         <button className= {style.button}> Click for next Quote</button>
-//       </div>
-//     </div>
-//   )
-// }
 
 import React, { useEffect, useState } from 'react';
 import style from '../styles/Quote.module.css';
@@ -38,26 +8,22 @@ export default function Quote() {
   const [quote, setQuote] = useState();
 
   useEffect(() => {
-    // Check if data exists in local storage
-    const storedData = localStorage.getItem('quoteData');
-    if (storedData) {
-      setData(JSON.parse(storedData));
-    } else {
-      fetchData();
-    }
+    axios.get('https://type.fit/api/quotes')
+        .then((res) => {
+      
+        localStorage.setItem('quoteData', JSON.stringify(res.data));})
+    
   }, []);
-
-  const fetchData = () => {
-    axios.get('https://type.fit/api/quotes').then((res) => {
-      const randomIndex = Math.floor(Math.random() * res.data.length);
-      const randomQuote = res.data[randomIndex];
+  useEffect(()=>{
+    let quoteData= JSON.parse(localStorage.getItem('quoteData'))
+    const randomIndex = Math.floor(Math.random() * quoteData.length);
+      const randomQuote = quoteData[randomIndex];
       setData(randomQuote);
-      localStorage.setItem('quoteData', JSON.stringify(randomQuote));
-    });
-  };
+  },
+  [quote])
 
   const handleNextQuote = () => {
-    fetchData();
+    setQuote(!quote)
   };
 
   return (

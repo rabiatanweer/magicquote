@@ -13,8 +13,8 @@ export default function SignUp() {
     };
     const handleSubmit= (e)=>{
         e.preventDefault();
-        localStorage.setItem(email, setEmail)
-        localStorage.setItem(password, setPassword)
+        localStorage.setItem("email", email)
+        localStorage.setItem("password", password)
     };
   return (
     <div className={style.main}>
