@@ -7,6 +7,10 @@ export default function Userquote() {
   const [data, setData] = useState({});
   const [quote, setQuote] = useState();
   const[search, setSearch]= useState();
+  const [inputValue, setInputValue] = useState('');
+  const [myQuote, setMyQuote] = useState(["abcd"]);
+  const useremail= localStorage.getItem("useremail")
+ 
 
   useEffect(() => {
     axios.get('https://type.fit/api/quotes')
@@ -30,14 +34,20 @@ export default function Userquote() {
   function addQuote() {
     setMyQuote([...myQuote, inputValue]);
     setInputValue('');
+    localStorage.setItem("userQuotes" ,myQuote)
+    localStorage.setItem(`${useremail}`, JSON.stringify( myQuote))
+   let savedquotes= localStorage.getItem(`${useremail}`)
+     savedquotes= JSON.parse([savedquotes]) 
+    setMyQuote(savedquotes)
+   console.log(savedquotes)
+
   }
 
   function handleInput(event) {
     setInputValue(event.target.value);
   }
 
-  const [inputValue, setInputValue] = useState('');
-  const [myQuote, setMyQuote] = useState([]);
+ 
   function searchInput(event){
     setSearch(event.target.value)
     console.log(search)
@@ -65,7 +75,7 @@ export default function Userquote() {
         </div>
         <div className={user.card}>
           <h1>User quotes</h1>
-          <input type="text" placeholder="Search Quote"  value={quote} onChange={searchInput} required />
+          <input type="text" placeholder="Search Quote"  value={search} onChange={searchInput} required />
 
           <div>
             <ul>
