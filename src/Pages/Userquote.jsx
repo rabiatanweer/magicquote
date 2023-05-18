@@ -8,8 +8,9 @@ export default function Userquote() {
   const [quote, setQuote] = useState();
   const[search, setSearch]= useState();
   const [inputValue, setInputValue] = useState('');
-  const [myQuote, setMyQuote] = useState(["abcd"]);
+  const [myQuote, setMyQuote] = useState([]);
   const useremail= localStorage.getItem("useremail")
+  const [userData, setUserData]= useState([]);
  
 
   useEffect(() => {
@@ -17,6 +18,14 @@ export default function Userquote() {
         .then((res) => {
       
         localStorage.setItem('quoteData', JSON.stringify(res.data));})
+       const userProtectedData = JSON.parse(localStorage.getItem(`${useremail}`))
+       if (userProtectedData) {
+        setMyQuote(userProtectedData);
+        setUserData(userProtectedData);
+      } else {
+        setMyQuote([]);
+        setUserData([]);
+      }
     
   }, []);
   useEffect(()=>{
@@ -32,15 +41,20 @@ export default function Userquote() {
   };
 
   function addQuote() {
-    setMyQuote([...myQuote, inputValue]);
-    setInputValue('');
-    localStorage.setItem("userQuotes" ,myQuote)
-    localStorage.setItem(`${useremail}`, JSON.stringify( myQuote))
-   let savedquotes= localStorage.getItem(`${useremail}`)
-     savedquotes= JSON.parse([savedquotes]) 
-    setMyQuote(savedquotes)
-   console.log(savedquotes)
-
+    
+    if(inputValue===""){
+       console.log("cnt be empty")
+    }
+    else{
+      setMyQuote([...myQuote, inputValue]);
+      setUserData([...myQuote, inputValue]);
+      setInputValue('');
+    
+      let savedquotes = JSON.parse(localStorage.getItem(`${useremail}`)) || [];
+      savedquotes.push(inputValue);
+      localStorage.setItem(`${useremail}`, JSON.stringify(savedquotes));
+      setMyQuote(savedquotes);
+    }
   }
 
   function handleInput(event) {
@@ -48,18 +62,19 @@ export default function Userquote() {
   }
 
  
-  function searchInput(event){
-    setSearch(event.target.value)
-    console.log(search)
-    console.log(myQuote)
-    // const searchValue = search.toLowerCase();
-   let filterQuote = myQuote.filter((quote)=>{
-        return
-
-            quote.text.toLowerCase().include(search);
-        
-    })
-    setMyQuote(filterQuote)
+  function searchInput(event) {
+    setSearch(event.target.value);
+    const searchValue = event.target.value;
+    setSearch(searchValue);
+   
+    if (searchValue === "") {
+      setUserData(myQuote);
+    } else {
+      const filteredData = myQuote.filter((item) => {
+        return item.toLowerCase().includes(searchValue.toLowerCase());
+      });
+      setUserData(filteredData);
+    }
   }
 
   return (
@@ -79,7 +94,7 @@ export default function Userquote() {
 
           <div>
             <ul>
-            {myQuote.map((quote, index) => (
+            {userData.map((quote, index) => (
                 <li key={index}>{quote}</li>
               ))}
             </ul>

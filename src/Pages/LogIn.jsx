@@ -18,7 +18,7 @@ export default function LogIn() {
       setPassword(e.target.value);
   };
    let inputEmail= localStorage.getItem(`email-${email}`)
-   let inputPassword= localStorage.getItem(`password-${password}`)
+   let inputPassword= localStorage.getItem(`password-${email}`)
     function handleSubmit(e){
       e.preventDefault();
       if(email===inputEmail && password==inputPassword){
@@ -30,7 +30,7 @@ export default function LogIn() {
         localStorage.setItem("useremail", email)
       }
       else{
-        setvalidLogin("Invalid email or password")
+        setvalidLogin("Invalid email or password, please try again")
         localStorage.setItem("login", false)
       }
 

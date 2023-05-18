@@ -6,10 +6,12 @@ import style from '../styles/Navbar.module.css'
 
 export default function Navbar() {
   const [Login, setLogIn]= useState(false);
-//  const Login = localStorage.getItem("login")
+  
+
 const navigate = useNavigate();
 useEffect(()=>{
-  setLogIn(localStorage.getItem("login"))
+  const storedLogin = JSON.parse(localStorage.getItem('login'));
+  setLogIn(storedLogin);
 },[]
 )
  function logoutHandler(){

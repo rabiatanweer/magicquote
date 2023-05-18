@@ -8,7 +8,7 @@ export default function SignUp() {
     const[email, setEmail]= useState("");
     const[password, setPassword]= useState("");
     const[login, setLogin]= useState("Please fill in this form to create an account.")
-    // const navigate = useNavigate();
+
     
     const handleEmailChange= (e)=>{
         setEmail(e.target.value);
@@ -19,18 +19,20 @@ export default function SignUp() {
     const handleSubmit= (e)=>{
         e.preventDefault();
         
-        if(email.includes("@")){
-          localStorage.setItem(`email-${email}`, email)
-        localStorage.setItem(`password-${password}`, password)
-        setLogin("your account has been created")
-        setEmail("")
-        setPassword("")
+        if (email.includes("@")) {
+          if (password.length >= 8) {
+            localStorage.setItem(`email-${email}`, email);
+            localStorage.setItem(`password-${email}`, password);
+            setLogin("Your account has been created");
+            setEmail("");
+            setPassword("");
+          } else {
+            setLogin("Password should be at least 8 characters long");
+          }
+        } else {
+          setLogin("Enter a valid email");
         }
-        else{
-          setLogin("Enter valid email")
-        }
-          // navigate("/login")
-    };
+      };
   return (
     <div className={style.main}>
      <form onSubmit={handleSubmit} >

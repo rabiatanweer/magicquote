@@ -30,6 +30,7 @@ body{
 
 .card h2{
     width: 100%;
+    text-align: center;
 
 }
 
@@ -48,4 +49,38 @@ body{
   }
   .button:hover{
     color: #063970;
+}
+@media (max-width: 768px) {
+    .card {
+        width: 80%;
+    }
+    .card h2{
+        font-size: 1.3rem;
+    }
+    .main h1{
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 90%;
+    }
+    .card h2{
+        font-size: 1.2rem;
+    }
+    .main h1{
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        text-align: center;
+    }
+    .button {
+    
+        /* width: 30%; */
+        font-size: 14px;
+        height: 12vh;
+        padding: 0.5rem 1rem;
+      }
 }

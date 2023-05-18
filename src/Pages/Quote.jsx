@@ -12,6 +12,7 @@ export default function Quote() {
         .then((res) => {
       
         localStorage.setItem('quoteData', JSON.stringify(res.data));})
+        
     
   }, []);
   useEffect(()=>{
