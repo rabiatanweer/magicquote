@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import style from '../styles/Quote.module.css';
 import user from '../styles/Userquote.module.css';
+import {AiOutlineCloseSquare} from "react-icons/ai";
+
 
 export default function Userquote() {
   const [data, setData] = useState({});
@@ -9,7 +11,8 @@ export default function Userquote() {
   const[search, setSearch]= useState();
   const [inputValue, setInputValue] = useState('');
   const [myQuote, setMyQuote] = useState([]);
-  const useremail= localStorage.getItem("useremail")
+  const useremail= localStorage.getItem("useremail");
+  const userName= localStorage.getItem(`name-${useremail}`)
   const [userData, setUserData]= useState([]);
  
 
@@ -26,7 +29,7 @@ export default function Userquote() {
         setMyQuote([]);
         setUserData([]);
       }
-    
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(()=>{
     let quoteData= JSON.parse(localStorage.getItem('quoteData'))
@@ -76,26 +79,35 @@ export default function Userquote() {
       setUserData(filteredData);
     }
   }
+  function deleteQoute(index){
+   const removeQuote =[...myQuote]
+    removeQuote.splice(index, 1)
+    console.log(removeQuote)
+    setMyQuote(removeQuote)
+    setUserData(removeQuote)
+    localStorage.setItem( `${useremail}`, JSON.stringify(removeQuote) )
+  }
 
   return (
     <div className={user.main}>
-      <h1>Welcome To Random Quotes Generator APP</h1>
+      <h1>Welcome "{userName}" to RandomQuoteGen: Inspire with Every Click</h1>
       <div className={user.section}>
         <div className={user.card}>
+        <h1>Ramdon quotes</h1>
           <h2>"{data.text}"</h2>
-          <h5>{data.author}</h5>
+          <h5>~{data.author}</h5>
           <button className={style.button} onClick={handleNextQuote}>
-          Click for next Quote
+           Next Quote
         </button>
         </div>
         <div className={user.card}>
           <h1>User quotes</h1>
           <input type="text" placeholder="Search Quote"  value={search} onChange={searchInput} required />
 
-          <div>
+          <div className={user.quotes}>
             <ul>
-            {userData.map((quote, index) => (
-                <li key={index}>{quote}</li>
+            {userData.map((quote , index) => (
+                <li key={index}> <span className={user.span} onClick={()=>{deleteQoute(index)}}>< AiOutlineCloseSquare size={20} color='purple'/> </span> {quote } </li>
               ))}
             </ul>
           </div>

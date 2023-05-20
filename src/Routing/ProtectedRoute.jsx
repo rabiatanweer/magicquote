@@ -13,6 +13,7 @@ const ProtectedRoute = (props) => {
     if (!isLoggedIn) {
       navigate('/login');
     }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

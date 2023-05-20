@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import style from  '../styles/Signup.module.css'
-import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -8,7 +8,7 @@ export default function LogIn() {
   const[email, setEmail]= useState("");
   const[password, setPassword]= useState("");
   const [validLogin, setvalidLogin]= useState("Please fill in this form to LogIn an account.")
-  // const navigate = useNavigate();
+  
  
   
   const handleEmailChange= (e)=>{
@@ -21,10 +21,9 @@ export default function LogIn() {
    let inputPassword= localStorage.getItem(`password-${email}`)
     function handleSubmit(e){
       e.preventDefault();
-      if(email===inputEmail && password==inputPassword){
+      if(email===inputEmail && password===inputPassword){
 
      localStorage.setItem("login", true)
-      // navigate("/userquote")
       window.location.href = "/userquote";
         console.log(email, password, "hello")
         localStorage.setItem("useremail", email)

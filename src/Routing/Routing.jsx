@@ -6,7 +6,6 @@ import Quote from '../Pages/Quote'
 import Userquote from '../Pages/Userquote'
 import SignUp from '../Pages/SignUp'
 import LogIn from '../Pages/LogIn'
-import Footer from '../Components/Footer'
 import ProtectedRoute from './ProtectedRoute'
 
 export default function Routing() {
@@ -19,9 +18,8 @@ export default function Routing() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={<LogIn />} />
           <Route path='/userquote' element={<ProtectedRoute Comp={Userquote} />} />
-          {/* <Route path='*' element={<Navigate to="/login" />} /> */}
+          { <Route path='*' element={<Navigate to="/login" />} /> }
         </Routes>
-        <Footer />
       </Router>
     </div>
   )
