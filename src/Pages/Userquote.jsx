@@ -3,7 +3,6 @@ import axios from 'axios';
 import user from '../styles/Userquote.module.css';
 import {AiOutlineCloseSquare} from "react-icons/ai";
 import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css'
 import 'react-toastify/dist/ReactToastify.min.css';
 
 
@@ -42,8 +41,8 @@ export default function Userquote() {
       setMyQuote(storedUserQoute)
       setUserData(storedUserQoute)
     } else {
-      setMyQuote("")
-      setUserData("")
+      setMyQuote([])
+      setUserData([])
     }
   }, [useremail])
 
