@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import style from  '../styles/Signup.module.css'
-import { useNavigate } from 'react-router-dom';
+
 
 
 
 export default function LogIn() {
   const[email, setEmail]= useState("");
   const[password, setPassword]= useState("");
-  // const navigate = useNavigate();
+  const [validLogin, setvalidLogin]= useState("Please fill in this form to LogIn an account.")
+  
  
   
   const handleEmailChange= (e)=>{
@@ -16,19 +17,19 @@ export default function LogIn() {
   const handlePasswordChange= (e)=>{
       setPassword(e.target.value);
   };
-   let inputEmail= localStorage.getItem("email")
-   let inputPassword= localStorage.getItem("password")
+   let inputEmail= localStorage.getItem(`email-${email}`)
+   let inputPassword= localStorage.getItem(`password-${email}`)
     function handleSubmit(e){
       e.preventDefault();
-      if(email===inputEmail && password==inputPassword){
+      if(email===inputEmail && password===inputPassword){
 
      localStorage.setItem("login", true)
-      // navigate("/userquote")
       window.location.href = "/userquote";
         console.log(email, password, "hello")
+        localStorage.setItem("useremail", email)
       }
       else{
-        console.log("not matched")
+        setvalidLogin("Invalid email or password, please try again")
         localStorage.setItem("login", false)
       }
 
@@ -39,7 +40,7 @@ export default function LogIn() {
       <form >
   <div className={style.container}>
     <h1>Log In</h1>
-    <p>Please fill in this form to LogIn an account.</p>
+    <p>{validLogin}</p>
     <hr />
     <label htmlFor="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email"value={email} onChange={handleEmailChange} required />

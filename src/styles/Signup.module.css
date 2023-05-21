@@ -3,16 +3,16 @@
 .main{
   /* background-color: #3CBBA4; */
   background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
-  width: 100%;
-  height: 90vh;
+  /* width: 100%; */
+  height: 100vh;
   color: #9f01ea;
  
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  
 }
-/* Full-width input fields */
+
   input[type=text], input[type=password] {
   width: 100%;
   padding: 15px;
@@ -32,12 +32,11 @@ hr {
   margin-bottom: 25px;
 }
 
-/* Set a style for all buttons */
+
 button {
   background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
   color: white;
   padding: 14px 20px;
-  /* margin: 8px 0; */
   border: none;
   cursor: pointer;
   width: 100%;
@@ -48,16 +47,15 @@ button:hover {
   opacity:1;
 }
 
-/* Extra styles for the cancel button */
 
 
-/* Float cancel and signup buttons and add an equal width */
+
  .signupbtn {
   float: left;
   width: 100%;
 }
 
-/* Add padding to container elements */
+
 .container {
  
   width: 100%;
@@ -81,8 +79,10 @@ button:hover {
 }
 
 /* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
+@media screen and (max-width:  320px) {
    .signupbtn {
     width: 100%;
   }
+  
+  
 }

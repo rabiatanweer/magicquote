@@ -10,17 +10,15 @@ export default function Quote() {
   useEffect(() => {
     axios.get('https://type.fit/api/quotes')
         .then((res) => {
-      
-        localStorage.setItem('quoteData', JSON.stringify(res.data));})
-    
+        localStorage.setItem('quoteData', JSON.stringify(res.data));}) 
   }, []);
+
   useEffect(()=>{
     let quoteData= JSON.parse(localStorage.getItem('quoteData'))
     const randomIndex = Math.floor(Math.random() * quoteData.length);
       const randomQuote = quoteData[randomIndex];
       setData(randomQuote);
-  },
-  [quote])
+  },[quote])
 
   const handleNextQuote = () => {
     setQuote(!quote)
@@ -34,7 +32,7 @@ export default function Quote() {
         <h2>" {data.text}"</h2>
         <h5> {data.author}</h5>
         <button className={style.button} onClick={handleNextQuote}>
-          Click for next Quote
+          Next Quote
         </button>
       </div>
     </div>
