@@ -39,7 +39,7 @@ body{
     margin: 10px;
     width: 40%;
     border-radius: 2rem;
-    height: 20rem;
+    height: 100%;
     
   }
   .quotes{
@@ -132,7 +132,7 @@ body{
     cursor: pointer;
    
   }
-  @media (max-width: 700px) {
+  @media (max-width: 680px) {
     .section {
         flex-direction: column;
     }
@@ -156,6 +156,14 @@ body{
       font-size: 20px;
     ;
      
+    }
+    .card button{
+      border-radius: 0.7rem;
+      font-size: 12px;
+      width: 40%;
+    }
+    .card{
+      width: 58%;
     }
   }
   

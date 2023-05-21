@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import style from '../styles/Quote.module.css';
 import user from '../styles/Userquote.module.css';
 import {AiOutlineCloseSquare} from "react-icons/ai";
+import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.min.css';
 
 
 export default function Userquote() {
@@ -15,29 +17,35 @@ export default function Userquote() {
   const userName= localStorage.getItem(`name-${useremail}`)
   const [userData, setUserData]= useState([]);
  
-
   useEffect(() => {
-    axios.get('https://type.fit/api/quotes')
-        .then((res) => {
-      
-        localStorage.setItem('quoteData', JSON.stringify(res.data));})
-       const userProtectedData = JSON.parse(localStorage.getItem(`${useremail}`))
-       if (userProtectedData) {
-        setMyQuote(userProtectedData);
-        setUserData(userProtectedData);
-      } else {
-        setMyQuote([]);
-        setUserData([]);
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(()=>{
     let quoteData= JSON.parse(localStorage.getItem('quoteData'))
-    const randomIndex = Math.floor(Math.random() * quoteData.length);
+    if (quoteData){
+      const randomIndex = Math.floor(Math.random() * quoteData.length);
       const randomQuote = quoteData[randomIndex];
       setData(randomQuote);
-  },
-  [quote])
+    }
+    else{
+    axios.get('https://type.fit/api/quotes')
+        .then((res) => {
+        localStorage.setItem('quoteData', JSON.stringify(res.data));
+        const randomIndex = Math.floor(Math.random() * res.data.length);
+        const randomQuote = res.data[randomIndex];
+        setData(randomQuote);
+      })  
+    }
+    
+  }, [quote]);
+  useEffect(() => {
+    const storedUserQoute = JSON.parse(localStorage.getItem(`${useremail}`)
+    )
+    if (storedUserQoute) {
+      setMyQuote(storedUserQoute)
+      setUserData(storedUserQoute)
+    } else {
+      setMyQuote("")
+      setUserData("")
+    }
+  }, [useremail])
 
   const handleNextQuote = () => {
     setQuote(!quote)
@@ -46,7 +54,7 @@ export default function Userquote() {
   function addQuote() {
     
     if(inputValue===""){
-       console.log("cnt be empty")
+      toast.info("Can't be empty ")
     }
     else{
       setMyQuote([...myQuote, inputValue]);
@@ -96,7 +104,7 @@ export default function Userquote() {
         <h1>Ramdon quotes</h1>
           <h2>"{data.text}"</h2>
           <h5>~{data.author}</h5>
-          <button className={style.button} onClick={handleNextQuote}>
+          <button onClick={handleNextQuote}>
            Next Quote
         </button>
         </div>

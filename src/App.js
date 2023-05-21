@@ -1,6 +1,6 @@
 
+import { ToastContainer } from 'react-toastify';
 import './App.css';
-
 import Routing from './Routing/Routing';
 
 
@@ -9,7 +9,7 @@ function App() {
     <div >
       
         <Routing/>
-  
+        <ToastContainer />
       
     </div>
   );

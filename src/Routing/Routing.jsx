@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route,  } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
 import Quote from '../Pages/Quote'
 import Userquote from '../Pages/Userquote'
@@ -18,7 +18,7 @@ export default function Routing() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={<LogIn />} />
           <Route path='/userquote' element={<ProtectedRoute Comp={Userquote} />} />
-          { <Route path='*' element={<Navigate to="/login" />} /> }
+          <Route path='*' element={<ProtectedRoute Comp={Userquote} />} />
         </Routes>
       </Router>
     </div>

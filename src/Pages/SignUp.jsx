@@ -22,7 +22,7 @@ export default function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (email.includes("@")) {
+    
       if (password.length >= 8) {
         const existingEmail = localStorage.getItem(`email-${email}`);
         if (existingEmail) {
@@ -39,9 +39,7 @@ export default function SignUp() {
       } else {
         setLogin("Password should be at least 8 characters long.");
       }
-    } else {
-      setLogin("Enter a valid email.");
-    }
+    
   };
   return (
     <div className={style.main}>
@@ -65,7 +63,7 @@ export default function SignUp() {
             <b>Email</b>
           </label>
           <input
-            type="text"
+            type="email"
             placeholder="Enter Email"
             name="email"
             value={email}
