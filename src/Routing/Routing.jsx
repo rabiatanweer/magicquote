@@ -1,26 +1,24 @@
 
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route,  } from 'react-router-dom'
-import Navbar from '../Components/Navbar'
-import Quote from '../Pages/Quote'
-import Userquote from '../Pages/Userquote'
-import SignUp from '../Pages/SignUp'
-import LogIn from '../Pages/LogIn'
-import ProtectedRoute from './ProtectedRoute'
+import {  Routes, Route  } from 'react-router-dom'
+import Quote from '../Components/Pages/Quote'
+import Userquote from '../Components/Pages/Userquote'
+import SignUp from '../Components/Pages/SignUp'
+import LogIn from '../Components/Pages/LogIn'
+import UserQuoteProtect from '../Components/Pages/UserQuoteProtect'
+import ErrorPage from '../Components/Pages/ErrorPage'
+
 
 export default function Routing() {
   return (
     <div>
-      <Router>
-        <Navbar />
         <Routes>
           <Route path='/' element={<Quote />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={<LogIn />} />
-          <Route path='/userquote' element={<ProtectedRoute Comp={Userquote} />} />
-          <Route path='*' element={<ProtectedRoute Comp={Userquote} />} />
+          <Route path='/userquote' element={<UserQuoteProtect  Comp={Userquote} />} />
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
-      </Router>
     </div>
   )
 }

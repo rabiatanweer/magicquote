@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import style from '../styles/Quote.module.css';
+import '../../styles/Quote.css'
 import axios from 'axios';
 
 export default function Quote() {
@@ -16,31 +16,30 @@ export default function Quote() {
       
     }
     else{
-    axios.get('https://type.fit/api/quotes')
-        .then((res) => {
-        localStorage.setItem('quoteData', JSON.stringify(res.data));
-        const randomIndex = Math.floor(Math.random() * res.data.length);
-        const randomQuote = res.data[randomIndex];
-        setData(randomQuote);
-      }) 
-       
-        
+       fetchData()  
+    
     }
-
   }, [quote]);
 
+  const fetchData = ()=>{
+    axios.get('https://type.fit/api/quotes') 
+    .then((res) => {
+    localStorage.setItem('quoteData', JSON.stringify(res.data));
+    const randomIndex = Math.floor(Math.random() * res.data.length);
+    const randomQuote = res.data[randomIndex];
+    setData(randomQuote);
+  }) 
+  }
   const handleNextQuote = () => {
     setQuote(!quote)
   };
-
   return (
-    <div className={style.main}>
+    <div className="main_quote">
       <h1> Welcome To Random Quotes Generator APP</h1>
-
-      <div className={style.card}>
+      <div className="card_quote">
         <h2>" {data.text}"</h2>
         <h5> {data.author}</h5>
-        <button className={style.button} onClick={handleNextQuote}>
+        <button className="button_quote" onClick={handleNextQuote}>
           Next Quote
         </button>
       </div>

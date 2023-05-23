@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import style from "../styles/Signup.module.css";
+import '../../styles/Signup.css';
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function SignUp() {
@@ -9,6 +11,7 @@ export default function SignUp() {
   const [login, setLogin] = useState(
     "Please fill in this form to create an account."
   );
+  const navigate = useNavigate()
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -21,8 +24,6 @@ export default function SignUp() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    
       if (password.length >= 8) {
         const existingEmail = localStorage.getItem(`email-${email}`);
         if (existingEmail) {
@@ -35,16 +36,19 @@ export default function SignUp() {
           setEmail("");
           setPassword("");
           setUserName("");
+          navigate('/login')
+    
         }
       } else {
         setLogin("Password should be at least 8 characters long.");
       }
+      
     
   };
   return (
-    <div className={style.main}>
+    <div className="main">
       <form onSubmit={handleSubmit}>
-        <div className={style.container}>
+        <div className="container">
           <h1>Sign Up</h1>
           <p> {login}</p>
           <hr />
@@ -82,8 +86,8 @@ export default function SignUp() {
             required
           />
 
-          <div className={style.clearfix}>
-            <button type="submit" className={style.signupbtn}>
+          <div className="clearfix">
+            <button type="submit" className="signupbtn">
               Sign Up
             </button>
           </div>

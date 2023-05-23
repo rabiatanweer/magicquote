@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import user from '../styles/Userquote.module.css';
+import  '../../styles/Userquote.css';
+import '../../styles/Quote.css'
 import {AiOutlineCloseSquare} from "react-icons/ai";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -24,16 +25,20 @@ export default function Userquote() {
       setData(randomQuote);
     }
     else{
-    axios.get('https://type.fit/api/quotes')
-        .then((res) => {
-        localStorage.setItem('quoteData', JSON.stringify(res.data));
-        const randomIndex = Math.floor(Math.random() * res.data.length);
-        const randomQuote = res.data[randomIndex];
-        setData(randomQuote);
-      })  
+      fetchData() 
     }
-    
   }, [quote]);
+
+  const fetchData = ()=>{
+      axios.get('https://type.fit/api/quotes') 
+      .then((res) => {
+      localStorage.setItem('quoteData', JSON.stringify(res.data));
+      const randomIndex = Math.floor(Math.random() * res.data.length);
+      const randomQuote = res.data[randomIndex];
+      setData(randomQuote);
+    }) 
+    }
+
   useEffect(() => {
     const storedUserQoute = JSON.parse(localStorage.getItem(`${useremail}`)
     )
@@ -96,10 +101,10 @@ export default function Userquote() {
   }
 
   return (
-    <div className={user.main}>
+    <div className="main_user">
       <h1>Welcome "{userName}" to RandomQuoteGen: Inspire with Every Click</h1>
-      <div className={user.section}>
-        <div className={user.card}>
+      <div className="section">
+        <div className="card">
         <h1>Ramdon quotes</h1>
           <h2>"{data.text}"</h2>
           <h5>~{data.author}</h5>
@@ -107,22 +112,22 @@ export default function Userquote() {
            Next Quote
         </button>
         </div>
-        <div className={user.card}>
+        <div className="card">
           <h1>User quotes</h1>
           <input type="text" placeholder="Search Quote"  value={search} onChange={searchInput} required />
 
-          <div className={user.quotes}>
+          <div className="quotes">
             <ul>
             {userData.map((quote , index) => (
-                <li key={index}> <span className={user.span} onClick={()=>{deleteQoute(index)}}>< AiOutlineCloseSquare size={20} color='purple'/> </span> {quote } </li>
+                <li key={index}> <span className="span" onClick={()=>{deleteQoute(index)}}>< AiOutlineCloseSquare size={20} /> </span> {quote } </li>
               ))}
             </ul>
           </div>
         </div>
        
       </div>
-      <div className={user.input}>
-        <div className={user.inputvalue}> 
+      <div className="input_user">
+        <div className="inputvalue"> 
         <input 
             type="text"
             placeholder="enter quote"
