@@ -14,16 +14,16 @@ export default function LogIn() {
       setPassword(e.target.value);
   };
 
-   let inputEmail= localStorage.getItem(`email-${email}`)
-   let inputPassword= localStorage.getItem(`password-${email}`)
+   let loginData= JSON.parse(localStorage.getItem(`user-${email}`))
+  //  let inputPassword= localStorage.getItem(`password-${email}`)
 
     function handleSubmit(e){
       e.preventDefault();
-      if(email===inputEmail && password===inputPassword){
+      if(email===loginData.email && password===loginData.password){
 
      localStorage.setItem("login", true)
       window.location.href = "/userquote";
-        localStorage.setItem("useremail", email)
+        // localStorage.setItem("useremail", email)
       }
       else{
         setvalidLogin("Invalid email or password, please try again")

@@ -14,7 +14,7 @@ export default function Userquote() {
   const [inputValue, setInputValue] = useState('');
   const [myQuote, setMyQuote] = useState([]);
   const useremail= localStorage.getItem("useremail");
-  const userName= localStorage.getItem(`name-${useremail}`)
+  const userName= JSON.parse(localStorage.getItem(`user-${useremail}`));
   const [userData, setUserData]= useState([]);
  
   useEffect(() => {
@@ -94,7 +94,6 @@ export default function Userquote() {
   function deleteQoute(index){
    const removeQuote =[...myQuote]
     removeQuote.splice(index, 1)
-    console.log(removeQuote)
     setMyQuote(removeQuote)
     setUserData(removeQuote)
     localStorage.setItem( `${useremail}`, JSON.stringify(removeQuote) )
@@ -102,7 +101,7 @@ export default function Userquote() {
 
   return (
     <div className="main_user">
-      <h1>Welcome "{userName}" to RandomQuoteGen: Inspire with Every Click</h1>
+      <h1>Welcome "{userName.name}" to RandomQuoteGen: Inspire with Every Click</h1>
       <div className="section">
         <div className="card">
         <h1>Ramdon quotes</h1>

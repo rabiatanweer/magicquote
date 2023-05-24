@@ -29,9 +29,16 @@ export default function SignUp() {
         if (existingEmail) {
           setLogin("This email already exists. Try with new one");
         } else {
-          localStorage.setItem(`name-${email}`, userName)
-          localStorage.setItem(`email-${email}`, email);
-          localStorage.setItem(`password-${email}`, password);
+          const user = {
+            name: userName,
+            email: email,
+            password: password
+          };
+    
+          localStorage.setItem(`user-${email}`, JSON.stringify(user));
+          // localStorage.setItem(`name-${email}`, userName)
+          // localStorage.setItem(`email-${email}`, email);
+          // localStorage.setItem(`password-${email}`, password);
           setLogin("Your account has been created.");
           setEmail("");
           setPassword("");

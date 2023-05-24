@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/Quote.css'
 import axios from 'axios';
 
+
 export default function Quote() {
   const [data, setData] = useState({});
   const [quote, setQuote] = useState();
-
+  
   useEffect(() => {
     let quoteData= JSON.parse(localStorage.getItem('quoteData'))
     if (quoteData){
@@ -16,11 +17,11 @@ export default function Quote() {
       
     }
     else{
-       fetchData()  
+      fetchData() 
     
     }
   }, [quote]);
-
+  
   const fetchData = ()=>{
     axios.get('https://type.fit/api/quotes') 
     .then((res) => {
@@ -30,6 +31,7 @@ export default function Quote() {
     setData(randomQuote);
   }) 
   }
+
   const handleNextQuote = () => {
     setQuote(!quote)
   };

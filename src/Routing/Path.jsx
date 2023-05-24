@@ -9,7 +9,7 @@ import UserQuoteProtect from '../Components/Pages/UserQuoteProtect'
 import ErrorPage from '../Components/Pages/ErrorPage'
 
 
-export default function Routing() {
+export default function Path() {
   return (
     <div>
         <Routes>

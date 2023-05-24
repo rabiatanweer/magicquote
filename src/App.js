@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import "./App.css";
-import Routing from "./Routing/Routing";
+import Path from "./Routing/Path";
 import Navbar from "./Components/Navbar";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -9,7 +9,7 @@ function App() {
     <div>
       <Router>
         <Navbar />
-        <Routing />
+        <Path />
         <ToastContainer />
       </Router>
     </div>
