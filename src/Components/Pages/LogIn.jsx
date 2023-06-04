@@ -23,7 +23,7 @@ export default function LogIn() {
 
      localStorage.setItem("login", true)
       window.location.href = "/userquote";
-        // localStorage.setItem("useremail", email)
+      localStorage.setItem("useremail", email)
       }
       else{
         setvalidLogin("Invalid email or password, please try again")
